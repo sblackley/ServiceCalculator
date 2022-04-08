@@ -97,6 +97,16 @@ function calculateTargetBaysTomorrow() {
     }
 }
 
+function maxBays() {
+    let numEmployees = parseInt(document.getElementById('numEmployees').value);
+
+    if (numEmployees > 1) {
+        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 8;
+    }
+    else {
+        document.getElementById('maxBaysOutput');
+    }
+}
 
 
 // Update variable with value of greenBays text field

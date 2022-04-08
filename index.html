@@ -9,12 +9,13 @@
     <h1>Service Calculator</h1>
 
     <h2>How It Works</h2>
+    
     <ul>
-        <li>Enter the number of green, yellow, and red bays currently in your store into the specified boxes. This will generate your current service percentage. (This may not match with what you see in SmartProject because that data is not calcluated in real-time.)
+        <li>Enter the number of green, yellow, and red bays currently in your store into the specified boxes. This will generate your current service percentage. 
         </li>
         <li>Enter the target service percentage in the specified box.</li>
         <li>It will then display the number of bays required to reach that percentage within the current day, as well as the number required to maintain that percentage at the start of the next day, when the yellow bays turn red.</li>
-        <li>Enter the number of employees working serivce to calculate how many bays each one needs to complete to reach the target percentage.</li>
+        <li>Enter the number of employees working serivce to calculate how many bays each one needs to complete to reach the target percentage, as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
 
     </ul>
 
@@ -32,7 +33,7 @@
         <input type="number" id="targetPercentage" oninput="calculateTargetBays()"><br><br>
 
         <label>Number of Employees Working Service</label><br>
-        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee()"><br><br><br>
+        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays()"><br><br><br>
 
 
     </form>
@@ -56,6 +57,8 @@
         <h3>Bays Per Employee - Next Day</h3>
         <p id="baysPerEmployeeNextDayOutput">---</p>
 
+        <h3>Maximum Number of Bays Completable While Staying at 2.5 Bays/Hour</h3>
+        <p id="maxBaysOutput">---</p> 
 </body>
 
 </html>
