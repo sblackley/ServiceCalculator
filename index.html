@@ -3,34 +3,35 @@
 <head>
     <script type="text/javascript" src="app.js"></script>
     <title>Service Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Service Calculator</h1>
-    <p>Ever wondered just how many bays it takes to reach that elusive service percentage your manager keeps hounding you about? And even when you start to get close, the next day just wipes all your progress away! I wrote this app in the hopes of demystifying some of this data, and allowing us to see in very clear terms what is required of us. </p>
 
-    <h2>How it works</h2>
+    <h2>How It Works</h2>
     <ul>
         <li>Enter the number of green, yellow, and red bays currently in your store into the specified boxes. This will generate your current service percentage. (This may not match with what you see in SmartProject because that data is not calcluated in real-time.)
         </li>
         <li>Enter the target service percentage in the specified box.</li>
         <li>It will then display the number of bays required to reach that percentage within the current day, as well as the number required to maintain that percentage at the start of the next day, when the yellow bays turn red.</li>
+        <li>Enter the number of employees working serivce to calculate how many bays each one needs to complete to reach the target percentage.</li>
 
     </ul>
 
     <form name="inputForm">
-        <label>Green</label><br>
+        <label>Green Bays</label><br>
         <input type="number" id="greenBays" class="bayInput" oninput='updateGreen()' placeholder="Enter number here" /><br><br>
 
-        <label>Yellow</label><br>
+        <label>Yellow Bays</label><br>
         <input type="number" id="yellowBays" class="bayInput"  oninput='updateYellow()' placeholder="Enter number here" /><br><br>
 
-        <label>Red</label><br>
+        <label>Red Bays</label><br>
         <input type="number" id="redBays" class="bayInput" oninput='updateRed()' placeholder="Enter number here" /><br><br><br>
-
+        
         <label>Target Service Percentage</label><br>
-        <input type="number" id="targetPercentage" oninput="calculateTargetBays()"><br><br><br>
+        <input type="number" id="targetPercentage" oninput="calculateTargetBays()"><br><br>
 
-        <label>Number of employees working service</label><br>
+        <label>Number of Employees Working Service</label><br>
         <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee()"><br><br><br>
 
 
@@ -41,14 +42,19 @@
         <p id="redBaysOutput"></p>
         
         <h3>Current Percentage</h3>
-        <p id="currentPercentageOutput"></p>
+        <p id="currentPercentageOutput">---</p>
 
-        <h3>Bays to Reach Target Percentage</h3>
-        <p id="targetPercentageOutput"></p>
+        <h3>Bays to Reach Target Percentage by End of Day</h3>
+        <p id="targetPercentageOutput">---</p>
         
-        <h3>Number of bays per employee</h3>
-        <p id="baysPerEmployeeOutput"></p>
+        <h3>Bays Per Employee - End of Day</h3>
+        <p id="baysPerEmployeeOutput">---</p>
 
+        <h3>Bays to Reach Target Percentage at Beginning of Next Day</h3>
+        <p id="targetBaysNextDayOutput">---</p>
+        
+        <h3>Bays Per Employee - Next Day</h3>
+        <p id="baysPerEmployeeNextDayOutput">---</p>
 
 </body>
 
