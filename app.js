@@ -1,4 +1,3 @@
-// Global variables, may change if let works within scope
 var greenBaysValue = 0;
 var yellowBaysValue = 0;
 var redBaysValue = 0;
@@ -8,8 +7,10 @@ var targetBays = 0;
 
 
 
-// Use bay values to calculate current service percentage
+///////// Current Percentage /////////
+
 function calculateCurrentPercentage() {
+
     let total = parseInt(greenBaysValue) + parseInt(yellowBaysValue) + parseInt(redBaysValue);
 
     let green = parseInt(greenBaysValue) + parseInt(yellowBaysValue);
@@ -19,33 +20,23 @@ function calculateCurrentPercentage() {
         currentPercentageOutput = document.getElementById('currentPercentageOutput');
 
         currentPercentage = ((green/total) * 100);
+
         currentPercentageOutput.textContent = currentPercentage.toFixed(1) + "%";
     }
 
     else {
+
         document.getElementById('currentPercentageOutput').textContent = "---";
-    }
-}
-
-function calculateBaysPerEmployee() {
-
-    let numEmployees = parseInt(document.getElementById('numEmployees').value);
-    
-    if (numEmployees >= 1) {
-    
-        document.getElementById('baysPerEmployeeOutput').textContent = (targetBays/Math.floor(numEmployees)).toFixed(1);
-
-        calculateTargetBaysTomorrow();
-    }
-    else {
-    
-        document.getElementById('baysPerEmployeeOutput').textContent = "---";
     
     }
 }
+
+////////// Target Percentage //////////
 
 function calculateTargetBays() {
+
     // Current percentage has already been calculated; bay numbers have been parsed and set
+
     if (currentPercentage > 1) {
     
         let total = parseInt(greenBaysValue) + parseInt(yellowBaysValue) + parseInt(redBaysValue);
@@ -53,6 +44,7 @@ function calculateTargetBays() {
         let completedBays = parseInt(greenBaysValue) + parseInt(yellowBaysValue);
 
         // Store target percentage user input
+
         targetPercentage = parseInt(document.getElementById("targetPercentage").value);
 
         if (targetPercentage > currentPercentage) {
@@ -60,9 +52,13 @@ function calculateTargetBays() {
             targetBays = ((targetPercentage/100) * total) - completedBays;
             
             // Update page with target bays
-            document.getElementById('targetPercentageOutput').textContent = targetBays.toFixed(1);
+
+            document.getElementById('targetPercentageOutput').textContent = targetBays.toFixed(1) + " bays to reach " + document.getElementById('targetPercentage').value + "%";
             
+            
+            calculateBaysPerEmployee(); 
         }
+        
         else {
 
             document.getElementById('targetPercentageOutput').textContent = "---";
@@ -72,7 +68,51 @@ function calculateTargetBays() {
 
 }
 
-function calculateTargetBaysTomorrow() {
+////////// Bays Per Employee ////////////
+
+function calculateBaysPerEmployee() {
+
+    let numEmployees = parseInt(document.getElementById('numEmployees').value);
+    
+    if (numEmployees >= 1) {
+    
+        document.getElementById('baysPerEmployeeOutput').textContent = (targetBays/Math.floor(numEmployees)).toFixed(1);
+
+        //calculateTargetBaysTomorrow(); - Function disabled pending fix
+    }
+    else {
+    
+        document.getElementById('baysPerEmployeeOutput').textContent = "---";
+    
+    }
+}
+
+//////////// Max bays within 2.5/hr ////////////
+
+function maxBays() {
+
+    let numEmployees = parseInt(document.getElementById('numEmployees').value);
+
+    if (numEmployees >= 1) {
+
+        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 6.5;
+
+    }
+
+    else {
+
+        document.getElementById('maxBaysOutput').textContent = "---";
+
+    }
+}
+
+
+/* ISSUE: Yellow bays turn red after 3 days, not 1. Green bays turn yellow after 12 days. (Depending on store tier)
+Need to find a way to get the actual number of yellow bays that turn red the next day. */
+
+///////////// Function disabled until fix is found ///////////////////
+
+/*function calculateTargetBaysTomorrow() {
     // Target bays are calculated
     let numEmployees = parseInt(document.getElementById('numEmployees').value);
 
@@ -96,17 +136,8 @@ function calculateTargetBaysTomorrow() {
         
     }
 }
+*/
 
-function maxBays() {
-    let numEmployees = parseInt(document.getElementById('numEmployees').value);
-
-    if (numEmployees > 1) {
-        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 8;
-    }
-    else {
-        document.getElementById('maxBaysOutput');
-    }
-}
 
 
 // Update variable with value of greenBays text field
@@ -114,6 +145,7 @@ function updateGreen() {
     greenBaysValue = document.getElementById('greenBays').value;
     
     calculateCurrentPercentage();
+    calculateTargetBays();
 }
 
 // Update variable with value of yellowBays text field
@@ -121,6 +153,7 @@ function updateYellow() {
     yellowBaysValue = document.getElementById('yellowBays').value;
     
     calculateCurrentPercentage();
+    calculateTargetBays();
 }
 
 // Update variable with value of redBays text field
@@ -128,6 +161,7 @@ function updateRed() {
     redBaysValue = document.getElementById('redBays').value;
     
     calculateCurrentPercentage();
+    calculateTargetBays();
 }
 
 

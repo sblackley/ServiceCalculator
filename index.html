@@ -9,34 +9,38 @@
     <h1>Service Calculator</h1>
 
     <h2>How It Works</h2>
-    
+    <div class="instructionList">
     <ul>
-        <li>Enter the number of green, yellow, and red bays currently in your store into the specified boxes. This will generate your current service percentage. 
+        <li>Enter the number of green, yellow, and red bays currently in your store into the corresponding boxes. This will generate your current service percentage.
         </li>
         <li>Enter the target service percentage in the specified box.</li>
-        <li>It will then display the number of bays required to reach that percentage within the current day, as well as the number required to maintain that percentage at the start of the next day, when the yellow bays turn red.</li>
-        <li>Enter the number of employees working serivce to calculate how many bays each one needs to complete to reach the target percentage, as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
-
+        <li>It will then display the number of bays required to reach that percentage within the current day.</li>
+        <li>Enter the number of employees working service to calculate how many bays each one needs to complete to reach the target percentage, as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
     </ul>
-
+    </div>
+    <hr>
+    
     <form name="inputForm">
+
+        <br>
         <label>Green Bays</label><br>
-        <input type="number" id="greenBays" class="bayInput" oninput='updateGreen()' placeholder="Enter number here" /><br><br>
+        <input type="number" id="greenBays" class="bayInput" oninput='updateGreen()' placeholder="" /><br><br>
 
         <label>Yellow Bays</label><br>
-        <input type="number" id="yellowBays" class="bayInput"  oninput='updateYellow()' placeholder="Enter number here" /><br><br>
+        <input type="number" id="yellowBays" class="bayInput"  oninput='updateYellow()' placeholder="" /><br><br>
 
         <label>Red Bays</label><br>
-        <input type="number" id="redBays" class="bayInput" oninput='updateRed()' placeholder="Enter number here" /><br><br><br>
+        <input type="number" id="redBays" class="bayInput" oninput='updateRed()' placeholder="" /><br><br><br><br>
         
         <label>Target Service Percentage</label><br>
-        <input type="number" id="targetPercentage" oninput="calculateTargetBays()"><br><br>
+        <input type="number" id="targetPercentage" oninput="calculateTargetBays()" placeholder=""><br><br>
 
         <label>Number of Employees Working Service</label><br>
-        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays()"><br><br><br>
+        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays()"><br><br>
 
 
     </form>
+    <hr>
 
         <p id="greenBaysOutput"></p>
         <p id="yellowBaysOutput"></p>
@@ -45,20 +49,28 @@
         <h3>Current Percentage</h3>
         <p id="currentPercentageOutput">---</p>
 
-        <h3>Bays to Reach Target Percentage by End of Day</h3>
+        <h3>Bays to Reach Target Percentage</h3>
         <p id="targetPercentageOutput">---</p>
         
-        <h3>Bays Per Employee - End of Day</h3>
+        <h3>Bays Per Employee</h3>
         <p id="baysPerEmployeeOutput">---</p>
 
+        <h3>Maximum Number of Bays Serviceable at 2.5 Bays per Hour</h3>
+        <p id="maxBaysOutput">---</p> 
+
+        <!-- 
+            
+        ===== Next day calculations disabled pending fix =====
+        
         <h3>Bays to Reach Target Percentage at Beginning of Next Day</h3>
         <p id="targetBaysNextDayOutput">---</p>
         
         <h3>Bays Per Employee - Next Day</h3>
         <p id="baysPerEmployeeNextDayOutput">---</p>
+        
+        -->
 
-        <h3>Maximum Number of Bays Completable While Staying at 2.5 Bays/Hour</h3>
-        <p id="maxBaysOutput">---</p> 
+
 </body>
 
 </html>
