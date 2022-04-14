@@ -20,9 +20,10 @@ input {
 }
 
 li {
-
+    
     line-height: 1.60em;
 }
+
 
 .instructionList {
     width: 1000px;

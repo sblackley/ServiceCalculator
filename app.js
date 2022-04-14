@@ -7,7 +7,7 @@ var targetBays = 0;
 
 
 
-///////// Current Percentage /////////
+//////////// Current Percentage ////////////
 
 function calculateCurrentPercentage() {
 
@@ -31,7 +31,7 @@ function calculateCurrentPercentage() {
     }
 }
 
-////////// Target Percentage //////////
+//////////// Target Percentage ////////////
 
 function calculateTargetBays() {
 
@@ -53,8 +53,7 @@ function calculateTargetBays() {
             
             // Update page with target bays
 
-            document.getElementById('targetPercentageOutput').textContent = targetBays.toFixed(1) + " bays to reach " + document.getElementById('targetPercentage').value + "%";
-            
+            document.getElementById('targetPercentageOutput').textContent = Math.ceil(targetBays) + " bays to reach " + document.getElementById('targetPercentage').value + "%";
             
             calculateBaysPerEmployee(); 
         }
@@ -68,7 +67,7 @@ function calculateTargetBays() {
 
 }
 
-////////// Bays Per Employee ////////////
+//////////// Bays Per Employee ////////////
 
 function calculateBaysPerEmployee() {
 
@@ -76,10 +75,11 @@ function calculateBaysPerEmployee() {
     
     if (numEmployees >= 1) {
     
-        document.getElementById('baysPerEmployeeOutput').textContent = (targetBays/Math.floor(numEmployees)).toFixed(1);
+        document.getElementById('baysPerEmployeeOutput').textContent = Math.ceil(targetBays/Math.floor(numEmployees));
 
         //calculateTargetBaysTomorrow(); - Function disabled pending fix
     }
+
     else {
     
         document.getElementById('baysPerEmployeeOutput').textContent = "---";
@@ -95,50 +95,48 @@ function maxBays() {
 
     if (numEmployees >= 1) {
 
-        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 7.5;
+        document.getElementById('maxBaysOutput').textContent = Math.ceil(2.5 * numEmployees * 7.5);
 
     }
 
     else {
 
         document.getElementById('maxBaysOutput').textContent = "---";
+        
 
     }
 }
 
+//////////// Percentage Effect ////////////
 
-/* ISSUE: Yellow bays turn red after 3 days, not 1. Green bays turn yellow after 12 days. (Depending on store tier)
-Need to find a way to get the actual number of yellow bays that turn red the next day. */
-
-///////////// Function disabled until fix is found ///////////////////
-
-/*function calculateTargetBaysTomorrow() {
-    // Target bays are calculated
+function percentageEffect() {
+    let yellowBaysChanging = parseInt(document.getElementById('nextDayBays').value);
     let numEmployees = parseInt(document.getElementById('numEmployees').value);
 
-    if (targetBays > 1) {
+    if (greenBaysValue >= 1 && yellowBaysValue >= 1 && redBaysValue >=1 && yellowBaysChanging >= 1 && numEmployees >= 1) {
+        let totalBays = parseInt(greenBaysValue) + parseInt(yellowBaysValue) + parseInt(redBaysValue);
+        let totalGreen = parseInt(greenBaysValue) + parseInt(yellowBaysValue) - yellowBaysChanging;
+        let nextDayPercentage = ((totalGreen/totalBays) * 100);
         
-        let total = parseInt(greenBaysValue) + parseInt(yellowBaysValue) + parseInt(redBaysValue);
-        let targetBaysNextDay = ((targetPercentage/100) * total) - parseInt(greenBaysValue)
-        document.getElementById('targetBaysNextDayOutput').textContent = targetBaysNextDay;
-        
-        if (numEmployees >= 1) {
+        // Total negative effect 
 
-            // Calculate number of bays per employee needed to reach by tomorrow
-            document.getElementById('baysPerEmployeeNextDayOutput').textContent = (targetBaysNextDay/Math.floor(numEmployees)).toFixed(1);
+        let negativeEffect = currentPercentage - nextDayPercentage;   
+        document.getElementById('nextDayEffectOutput').textContent = "-" + negativeEffect.toFixed(1) + "%";
         
-        }
-        else {
+
+        // Bays to maintain target percentage
+        document.getElementById('targetBaysNextDayOutput').textContent = Math.ceil(targetBays + yellowBaysChanging);
+        document.getElementById('baysPerEmployeeNextDayOutput').textContent = Math.ceil((targetBays + yellowBaysChanging) / numEmployees);
         
-            document.getElementById('baysPerEmployeeNextDayOutput').textContent = "---";
-        
-        }
-        
+
+
+    }
+    else {
+        document.getElementById('nextDayEffectOutput').textContent = "---";
+        document.getElementById('targetBaysNextDayOutput').textContent = "---";
+        document.getElementById('baysPerEmployeeNextDayOutput').textContent = "---";
     }
 }
-*/
-
-
 
 // Update variable with value of greenBays text field
 function updateGreen() {
@@ -163,19 +161,3 @@ function updateRed() {
     calculateCurrentPercentage();
     calculateTargetBays();
 }
-
-
-
-
-/* 
-
-// Update variable with value of targetPercentage text field
-function updateTargetPercentage() {
-    if (currentPercentage > 1) {
-        targetPercentage = document.getElementById("targetPercentage").value;
-        if (targetPercentage > currentPercentage) {
-            document.getElementById("targetPercentageOutput").textContent = targetPercentage;
-        }
-    }
-}
-*/
