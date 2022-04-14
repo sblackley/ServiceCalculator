@@ -20,8 +20,8 @@
         <li>Enter the number of green, yellow, and red bays currently in your store into the corresponding boxes. This will generate your current service percentage.
         </li>
         <li>Enter the target service percentage in the specified box.</li>
-        <li>It will then display the number of bays required to reach that percentage within the current day. Bay values are rounded up.</li>
-        <li>Enter the number of employees working service to calculate how many bays each one needs to complete to reach the target percentage,<br> as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
+        <li>It will then display the number of bays required to reach that percentage within the current day. The target bays and bays per employee values are rounded up.</li>
+        <li>Enter the number of employees working service to calculate how many bays each one needs to complete to reach the target percentage, as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
     </ul>
     </div>
     <hr>
@@ -42,7 +42,7 @@
         <input type="number" id="targetPercentage" oninput="calculateTargetBays()" placeholder="Enter a number"><br><br>
 
         <label>Number of Employees Working Service</label><br>
-        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays()" placeholder="Enter a number"><br><br>
+        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays(); percentageEffect()" placeholder="Enter a number"><br><br>
 
 
     </form>
@@ -79,6 +79,7 @@
             <label>Yellow Bays Changing Tomorrow</label><br>
             <input type="number" id="nextDayBays" placeholder="Enter a number" oninput="percentageEffect()">
         </form>
+        <br>
 
         <h3>Percentage Effect</h3>
         <p id="nextDayEffectOutput">---</p>
