@@ -7,13 +7,15 @@ p {
 }
 
 label {
-    font-size: 1.08em;
+    font-size: 1.08em;    
 }
 
 input {
     width: 175px;
     height: 20px;
     font-size: 1.05em;
+    border: 1.5px solid black;
+    border-radius: 4px;
 
 }
 

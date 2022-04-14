@@ -95,7 +95,7 @@ function maxBays() {
 
     if (numEmployees >= 1) {
 
-        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 6.5;
+        document.getElementById('maxBaysOutput').textContent = 2.5 * numEmployees * 7.5;
 
     }
 
