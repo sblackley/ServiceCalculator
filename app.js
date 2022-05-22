@@ -53,7 +53,7 @@ function calculateTargetBays() {
             
             // Update page with target bays
 
-            document.getElementById('targetPercentageOutput').textContent = Math.ceil(targetBays) + " bays to reach " + document.getElementById('targetPercentage').value + "%";
+            document.getElementById('targetPercentageOutput').textContent = Math.ceil(targetBays);
             
             calculateBaysPerEmployee(); 
         }

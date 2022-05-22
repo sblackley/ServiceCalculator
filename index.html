@@ -1,98 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+        }
+    </style>
     <script type="text/javascript" src="app.js"></script>
     <title>Service Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body onload="document.inputForm.reset(); document.nextDayForm.reset()">
 
-    <h1>Service Calculator</h1>
+    <div class="home">
+        <div class="homeContainer">
+            <div class="navbar">
+                <div class="wrapper">
+                    <div class="header">
+                        <p class="title">Service Calculator</p>
+                    </div>
 
-    <h2>How It Works</h2>
-    <div class="instructionList">
-    <ul>
-        <li>Enter the number of green, yellow, and red bays currently in your store into the corresponding boxes. This will generate your current service percentage.
-        </li>
-        <li>Enter the target service percentage in the specified box.</li>
-        <li>It will then display the number of bays required to reach that percentage within the current day. The target bays and bays per employee values are rounded up.</li>
-        <li>Enter the number of employees working service to calculate how many bays each one needs to complete to reach the target percentage, as well as the maximum number of bays those employees can service while staying within 2.5 bays per hour.</li>
-    </ul>
+                    <div class="items">
+                        <p class="credit">Steven Blackley - Store #449</p>
+                    </div>
+                </div>
+            </div>
+            <div class="instructionContainer">
+                <div class='instructionSlide'>
+                    <div class="top">
+                        <h1 class="title">How It Works</h1>
+                    </div>
+                    <div class="bottom">
+                        <ul class="instructions">
+                            <li>Enter the number of green, yellow, and red bays currently in your store into the
+                                corresponding boxes. This will generate your current service percentage.
+                            </li>
+                            <li>Enter the target service percentage in the specified box.</li>
+                            <li>It will then display the number of bays required to reach that percentage within the
+                                current day. The target bays and bays per employee values are rounded up.</li>
+                            <li>Enter the number of employees working service to calculate how many bays each one needs
+                                to complete to reach the target percentage, as well as the maximum number of bays those
+                                employees can service while staying within 2.5 bays per hour.</li>
+                        </ul>
+                    </div>
+                    <div class="top">
+                        <h1 class="title">Calculating Future Negative Percentage Impacts</h1>
+                    </div>
+                    <div class="bottom">
+                        <ul class="instructions">
+                            <li>Using the number of yellow bays changing on a given day, we can also predict the impact that will have on our service percentage</li>
+                            <li>To get the number of bays that will change from yellow to red the next day, open the list of yellow bays by clicking on the yellow wedge of the pie chart in SmartProject.</li>
+                            <li>Enter tomorrow's date in the search box (e.g. 01-23). </li>
+                            <li>Go to the bottom of the page where it displays the number of results (not the total) and enter that number in the provided box below on this page. </li>
+                            <li>These steps can also be used with the list of green bays to estimate the percentage impact any day will have, although going beyond the next day invalidates any of the related bay calculations.</li>    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="inputOutput">
+                <div class="inputContainer">
+                    <div class="listTitle"></div>
+                    <div className="table">
+
+                        <form class="inputCard" name="inputForm">
+
+                            <label>Green Bays</label><br />
+
+                            <input type="number" id="greenBays" class="bayInput" oninput="updateGreen();"
+                                placeholder="Enter green bays" /><br />
+
+                            <label>Yellow Bays</label><br />
+
+                            <input type="number" id="yellowBays" class="bayInput" oninput="updateYellow();"
+                                placeholder="Enter yellow bays" /><br />
+
+                            <label>Red Bays</label><br />
+
+                            <input type="number" id="redBays" class="bayInput" oninput="updateRed();"
+                                placeholder="Enter red bays" /><br />
+
+                            <label>Target Service Percentage</label><br />
+
+                            <input type="number" id="targetPercentage" oninput="calculateTargetBays()"
+                                placeholder="Enter a number" /><br />
+
+                            <label>Employees Working Service</label><br />
+
+                            <input type="number" id="numEmployees" min="0" placeholder="Enter a number"
+                                oninput="calculateBaysPerEmployee(); maxBays(); percentageEffect()" /> <br>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="widgets">
+                    <div class="widget">
+                        <div class="left">
+                            <span class="title">CURRENT PERCENTAGE</span>
+                            <span class="output" id="currentPercentageOutput">---</span>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="left">
+                            <span class="title">BAYS TO REACH TARGET PERCENTAGE</span>
+                            <span class="output" id="targetPercentageOutput">---</span>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="left">
+                            <span class="title">BAYS PER EMPLOYEE</span>
+                            <span class="output" id="baysPerEmployeeOutput">---</span>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="left">
+                            <span class="title">MAX BAYS AT 2.5 PER HOUR</span>
+                            <span class="output" id="maxBaysOutput">---</span>
+                        </div>
+                    </div>                   
+                </div>
+                    <div class="inputContainer">
+                        <div class="listTitle"></div>
+                        <div className="table">
+                            <form name="nextDayForm">
+                                <br>
+                                <label>Yellow Bays Changing Tomorrow</label><br>
+                                <input type="number" id="nextDayBays" placeholder="Enter a number" oninput="percentageEffect()">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="widgets">
+                        <div class="widget">
+                            <div class="left">
+                                <span class="title">NEGATIVE PERCENTAGE EFFECT</span>
+                                <span class="output" id="nextDayEffectOutput">---</span>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="left">
+                                <span class="title">BAYS TO MAINTAIN TARGET PERCENTAGE</span>
+                                <span class="output" id="targetBaysNextDayOutput">---</span>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="left">
+                                <span class="title">BAYS PER EMPLOYEE</span>
+                                <span class="output" id="baysPerEmployeeNextDayOutput">---</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
     </div>
-    <hr>
-    
-    <form name="inputForm">
-
-        <br>
-        <label>Green Bays</label><br>
-        <input type="number" id="greenBays" class="bayInput" oninput='updateGreen()' placeholder="Enter green bays" /><br><br>
-
-        <label>Yellow Bays</label><br>
-        <input type="number" id="yellowBays" class="bayInput"  oninput='updateYellow()' placeholder="Enter yellow bays" /><br><br>
-
-        <label>Red Bays</label><br>
-        <input type="number" id="redBays" class="bayInput" oninput='updateRed()' placeholder="Enter red bays" /><br><br><br><br>
-        
-        <label>Target Service Percentage</label><br>
-        <input type="number" id="targetPercentage" oninput="calculateTargetBays()" placeholder="Enter a number"><br><br>
-
-        <label>Number of Employees Working Service</label><br>
-        <input type="number" id="numEmployees" min="0" oninput="calculateBaysPerEmployee(); maxBays(); percentageEffect()" placeholder="Enter a number"><br><br>
-
-
-    </form>
-    <hr>
-
-        <p id="greenBaysOutput"></p>
-        <p id="yellowBaysOutput"></p>
-        <p id="redBaysOutput"></p>
-        
-        <h3>Current Percentage</h3>
-        <p id="currentPercentageOutput">---</p>
-
-        <h3>Bays to Reach Target Percentage</h3>
-        <p id="targetPercentageOutput">---</p>
-        
-        <h3>Bays Per Employee</h3>
-        <p id="baysPerEmployeeOutput">---</p>
-
-        <h3>Maximum Number of Bays Serviceable at 2.5 Bays per Hour</h3>
-        <p id="maxBaysOutput">---</p> <hr>
-
-        <h1>Next Day Calculations</h1>
-        
-        <ul>
-            <li>This section will calculate the effect the current yellow bays will have on the next day's service percentage when they turn red.</li>
-            <li>To get the number of bays that will change from yellow to red the next day, open the list of yellow bays by clicking on the yellow wedge of the pie chart in SmartProject.</li>
-            <li>Enter tomorrow's date in the search box (e.g. 01-23). </li>
-            <li>Go to the bottom of the page where it displays the number of results (not the total) and enter that number in the provided box below on this page. </li>
-            
-        </ul>
-        
-        <form name="nextDayForm">
-            <br>
-            <label>Yellow Bays Changing Tomorrow</label><br>
-            <input type="number" id="nextDayBays" placeholder="Enter a number" oninput="percentageEffect()">
-        </form>
-        <br>
-
-        <h3>Percentage Effect</h3>
-        <p id="nextDayEffectOutput">---</p>
-        <p id="nextDayPercentageOutput"></p>
-        
-        
-        <h3>Bays to Maintain Target Percentage at Start of Next Day</h3>
-        <p id="targetBaysNextDayOutput">---</p>
-        
-        
-        <h3>Bays Per Employee</h3>
-        <p id="baysPerEmployeeNextDayOutput">---</p>
-        
-    </body>
+</body>
 
 </html>
