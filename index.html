@@ -68,10 +68,10 @@
                     </div>
                     <div class="bottom">
                         <ul class="instructions">
-                            <li>Using the number of yellow bays changing on a given day, we can also predict the impact that will have on our service percentage</li>
+                            <li>Using the number of future bays turning red on any given day, we can predict the impact that they will have on the service percentage.</li>
                             <li>To get the number of bays that will change from yellow to red the next day, open the list of yellow bays by clicking on the yellow wedge of the pie chart in SmartProject.</li>
                             <li>Enter tomorrow's date in the search box (e.g. 01-23). </li>
-                            <li>Go to the bottom of the page where it displays the number of results (not the total) and enter that number in the provided box below on this page. </li>
+                            <li>Go to the bottom of the page where it displays the number of results (not the total); this is the number of bays that will turn red on that day.  </li>
                             <li>These steps can also be used with the list of green bays to estimate the percentage impact of any day within the cycle, although going beyond the next day invalidates the related bay calculations.</li>    
                         </ul>
                     </div>
@@ -146,7 +146,7 @@
                         <div className="table">
                             <form name="nextDayForm">
                                 <br>
-                                <label>Yellow Bays Changing Tomorrow</label><br>
+                                <label>Future Bays Turning Red</label><br>
                                 <input type="number" id="nextDayBays" placeholder="Enter a number" oninput="percentageEffect()">
                             </form>
                         </div>
