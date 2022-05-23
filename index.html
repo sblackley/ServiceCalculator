@@ -17,6 +17,14 @@
         }
     </style>
     <script type="text/javascript" src="app.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBYW5D1VFN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZBYW5D1VFN');
+    </script>
     <title>Service Calculator</title>
 
 </head>
@@ -33,6 +41,7 @@
 
                     <div class="items">
                         <p class="credit">Steven Blackley - Store #449</p>
+                        <p class="email">steven.blackley@outlook.com</p>
                     </div>
                 </div>
             </div>
@@ -55,7 +64,7 @@
                         </ul>
                     </div>
                     <div class="top">
-                        <h1 class="title">Calculating Future Negative Percentage Impacts</h1>
+                        <h1 class="title">Predicting Future Negative Percentage Impacts</h1>
                     </div>
                     <div class="bottom">
                         <ul class="instructions">
@@ -63,7 +72,7 @@
                             <li>To get the number of bays that will change from yellow to red the next day, open the list of yellow bays by clicking on the yellow wedge of the pie chart in SmartProject.</li>
                             <li>Enter tomorrow's date in the search box (e.g. 01-23). </li>
                             <li>Go to the bottom of the page where it displays the number of results (not the total) and enter that number in the provided box below on this page. </li>
-                            <li>These steps can also be used with the list of green bays to estimate the percentage impact any day will have, although going beyond the next day invalidates any of the related bay calculations.</li>    
+                            <li>These steps can also be used with the list of green bays to estimate the percentage impact of any day within the cycle, although going beyond the next day invalidates the related bay calculations.</li>    
                         </ul>
                     </div>
                 </div>
@@ -95,7 +104,7 @@
                             <label>Target Service Percentage</label><br />
 
                             <input type="number" id="targetPercentage" oninput="calculateTargetBays()"
-                                placeholder="Enter a number" /><br />
+                                placeholder="Enter target percentage" /><br />
 
                             <label>Employees Working Service</label><br />
 
